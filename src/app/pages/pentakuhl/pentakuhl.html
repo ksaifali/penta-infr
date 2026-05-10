@@ -1,0 +1,198 @@
+<app-navbar [goldLogo]="true"></app-navbar>
+
+<!-- HERO -->
+<section class="pk-hero">
+  <div class="pk-hero__bg">
+    <div class="pk-hero__cryo-rings">
+      <div class="pk-cryo-ring pk-cryo-ring--1"></div>
+      <div class="pk-cryo-ring pk-cryo-ring--2"></div>
+      <div class="pk-cryo-ring pk-cryo-ring--3"></div>
+    </div>
+  </div>
+  <div class="container pk-hero__content">
+    <div class="pk-hero__badge">A Division of Penta Freight Pvt. Ltd.</div>
+    <h1 class="pk-hero__title"><span>Penta</span><span class="pk-hero__kuhl">Kühl</span></h1>
+    <p class="pk-hero__tagline">Cold Chain Logistics. Redefined.</p>
+    <p class="pk-hero__subtitle">India's specialist in temperature-sensitive pharmaceutical logistics — combining ISTA 7D validated packaging, IoT real-time monitoring, and an extensive reefer fleet across 8 major airport locations.</p>
+    <div class="pk-hero__actions">
+      <a routerLink="/" fragment="contact" class="btn btn--gold">Get a Cold Chain Quote</a>
+      <a href="#services" class="btn btn--outline">Our Products</a>
+    </div>
+    <div class="pk-hero__temp-range">
+      <div class="pk-temp-bar">
+        <div class="pk-temp-segment pk-temp-segment--freeze"><span>Frozen</span><span>-20°C</span></div>
+        <div class="pk-temp-segment pk-temp-segment--chill"><span>Chilled</span><span>2–8°C</span></div>
+        <div class="pk-temp-segment pk-temp-segment--cts"><span>CRT</span><span>15–25°C</span></div>
+        <div class="pk-temp-segment pk-temp-segment--ambient"><span>Ambient</span><span>+25°C</span></div>
+      </div>
+      <span class="pk-temp-label">Full temperature range coverage</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="pk-stats-bar">
+  <div class="container pk-stats-bar__inner">
+    <div class="pk-stat"><span class="pk-stat__num" data-target="8" data-suffix="">0</span><span class="pk-stat__label">Airport Locations</span></div>
+    <div class="pk-stat-sep"></div>
+    <div class="pk-stat"><span class="pk-stat__num">ISTA</span><span class="pk-stat__label">7D Validated Packaging</span></div>
+    <div class="pk-stat-sep"></div>
+    <div class="pk-stat"><span class="pk-stat__num">IoT</span><span class="pk-stat__label">Real-Time Data Logging</span></div>
+    <div class="pk-stat-sep"></div>
+    <div class="pk-stat"><span class="pk-stat__num">GDP</span><span class="pk-stat__label">Compliant Operations</span></div>
+    <div class="pk-stat-sep"></div>
+    <div class="pk-stat"><span class="pk-stat__num">Pelican</span><span class="pk-stat__label">BioThermal™ Authorised</span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="pk-about">
+  <div class="container pk-about__inner">
+    <div class="pk-about__text animate-up">
+      <div class="section-eyebrow pk-eyebrow">About PentaKühl</div>
+      <h2 class="section-title">Specialized Cold Chain<br/>for Pharma</h2>
+      <p class="section-subtitle">PentaKÜHL serves and offers temperature-sensitive pharmaceutical solutions with its unique range of passive packaging products. As the authorised distributor for Pelican BioThermal™ products in India, this division addresses the full range of pharmaceutical requirements.</p>
+      <p class="section-subtitle" style="margin-top:12px">We specialise in transportation of temperature-sensitive and time-critical shipments of IMPs, Comparators, APIs, High-value finished formulations, and DG samples.</p>
+    </div>
+    <div class="pk-about__certifications animate-up" data-delay="150">
+      @for (cert of certs; track cert.title) {
+        <div class="pk-cert">
+          <div class="pk-cert__icon">{{ cert.icon }}</div>
+          <div class="pk-cert__content">
+            <strong>{{ cert.title }}</strong>
+            <p>{{ cert.desc }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- INFRASTRUCTURE -->
+<section class="pk-infra" id="services">
+  <div class="container">
+    <div class="pk-infra__header animate-up">
+      <div class="section-eyebrow pk-eyebrow">Infrastructure</div>
+      <h2 class="section-title section-title--white">Our Cold Chain<br/>Network</h2>
+      <p class="section-subtitle section-subtitle--white">A robust infrastructure to facilitate all temperature-sensitive consignments.</p>
+    </div>
+    <div class="pk-infra__grid">
+      @for (card of infraCards; track card.title; let i = $index) {
+        <div class="pk-infra-card animate-up" [attr.data-delay]="i * 80">
+          <div class="pk-infra-card__top">
+            <div class="pk-infra-card__icon" [innerHTML]="card.icon"></div>
+            <h3>{{ card.title }}</h3>
+          </div>
+          <p>{{ card.desc }}</p>
+          @if (card.temps) {
+            <div class="pk-infra-card__temps">
+              @for (t of card.temps; track t.label) {
+                <span [style.background]="t.bg">{{ t.label }}</span>
+              }
+            </div>
+          }
+          @if (card.feat) {
+            <div class="pk-infra-card__feat">{{ card.feat }}</div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGING PRODUCTS -->
+<section class="pk-products">
+  <div class="container">
+    <div class="pk-products__header animate-up">
+      <div class="section-eyebrow pk-eyebrow">Packaging Solutions</div>
+      <h2 class="section-title">ISTA 7D Validated<br/>Thermal Packaging</h2>
+      <p class="section-subtitle">Our single-use and reusable packaging solutions deliver consistent results using advanced phase change materials and vacuum insulation panels.</p>
+    </div>
+    <div class="pk-products__grid">
+      @for (prod of products; track prod.title; let i = $index) {
+        <div class="pk-product-card animate-up" [attr.data-delay]="i * 100">
+          <div class="pk-product-card__header">
+            <div class="pk-product-card__num">0{{ i + 1 }}</div>
+            <h3>{{ prod.title }}</h3>
+          </div>
+          <p>{{ prod.desc }}</p>
+          <div class="pk-product-card__specs">
+            @for (spec of prod.specs; track spec.key) {
+              <div class="pk-spec"><span>{{ spec.key }}</span><span>{{ spec.val }}</span></div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CARGO TYPES -->
+<section class="pk-cargo">
+  <div class="container">
+    <div class="pk-cargo__header animate-up">
+      <div class="section-eyebrow pk-eyebrow">Cargo Types</div>
+      <h2 class="section-title section-title--white">What We Transport</h2>
+    </div>
+    <div class="pk-cargo__list">
+      @for (cargo of cargoTypes; track cargo.title; let i = $index) {
+        <div class="pk-cargo-item animate-up" [attr.data-delay]="i * 60">
+          <div class="pk-cargo-item__icon">{{ cargo.icon }}</div>
+          <h3>{{ cargo.title }}</h3>
+          <p>{{ cargo.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- NETWORK -->
+<section class="pk-network">
+  <div class="container pk-network__inner">
+    <div class="pk-network__content animate-up">
+      <div class="section-eyebrow pk-eyebrow">Our Network</div>
+      <h2 class="section-title">Pan-India Presence,<br/>Global Reach</h2>
+      <p class="section-subtitle">With offices at 8 major airport locations across India and a global partner network, PentaKühl is positioned to serve your cold chain needs from any origin to any destination.</p>
+      <div class="pk-network__features">
+        <div class="pk-net-feat"><div class="pk-net-feat__line"></div><div><strong>In-House Customs Clearance</strong><p>Dedicated customs teams specialized in pharma imports/exports at every major airport</p></div></div>
+        <div class="pk-net-feat"><div class="pk-net-feat__line"></div><div><strong>Dedicated Import/Export Teams</strong><p>Separate teams managing inbound and outbound pharmaceutical shipments</p></div></div>
+        <div class="pk-net-feat"><div class="pk-net-feat__line"></div><div><strong>Chicago, USA Office</strong><p>Strategic US expansion for seamless North America cold chain logistics integration</p></div></div>
+      </div>
+      <a routerLink="/" fragment="contact" class="btn btn--gold" style="margin-top:32px">Request a Cold Chain Quote</a>
+    </div>
+    <div class="pk-network__map animate-up" data-delay="150">
+      <div class="pk-map-card">
+        <div class="pk-map-title">Operational Locations</div>
+        <div class="pk-location-list">
+          @for (loc of locations; track loc.code) {
+            <div class="pk-location">
+              <span class="pk-location__dot pk-location__dot--active"></span>
+              <span>{{ loc.name }} ({{ loc.code }})</span>
+              @if (loc.badge) { <span class="pk-location__badge">{{ loc.badge }}</span> }
+            </div>
+          }
+          <div class="pk-location" style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08)">
+            <span class="pk-location__dot" style="background:var(--gold)"></span>
+            <span>Chicago, USA</span>
+            <span class="pk-location__badge" style="background:rgba(201,168,76,.15);color:var(--gold)">New</span>
+          </div>
+        </div>
+        <div class="pk-map-card__footer">info&#64;pentakuhl.com</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="pk-cta">
+  <div class="container pk-cta__inner">
+    <h2 class="pk-cta__title animate-up">Ready to Ship Your<br/>Temperature-Sensitive Cargo?</h2>
+    <p class="pk-cta__sub animate-up" data-delay="80">Connect with our cold chain specialists for a tailored pharmaceutical logistics solution.</p>
+    <div class="pk-cta__actions animate-up" data-delay="160">
+      <a routerLink="/" fragment="contact" class="btn btn--gold">Get a Quote</a>
+      <div class="pk-cta__contact"><span>Or call us at</span><strong>+91 22-6222-6222</strong></div>
+    </div>
+  </div>
+</section>
+
+<app-footer [dark]="true"></app-footer>
