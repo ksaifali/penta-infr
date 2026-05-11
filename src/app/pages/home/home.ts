@@ -1,15 +1,37 @@
 import { Component, AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { Navbar } from '../../components/navbar/navbar';
 import { Footer } from '../../components/footer/footer';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, Navbar, Footer],
+  imports: [RouterLink, Navbar, Footer, FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class HomeComponent implements AfterViewInit {
+  formData = { name: '', company: '', email: '', phone: '', service: '', message: '' };
+  formStatus: 'idle' | 'loading' | 'success' | 'error' = 'idle';
+
+  constructor(private contactService: ContactService) {}
+
+  onSubmit() {
+    this.formStatus = 'loading';
+    this.contactService.submit({
+      name: this.formData.name,
+      email: this.formData.email,
+      phone: this.formData.phone,
+      message: `Service: ${this.formData.service} | Company: ${this.formData.company} | ${this.formData.message}`
+    }).subscribe({
+      next: () => {
+        this.formStatus = 'success';
+        this.formData = { name: '', company: '', email: '', phone: '', service: '', message: '' };
+      },
+      error: () => { this.formStatus = 'error'; }
+    });
+  }
   whyCards = [
     { title: 'Professional Management', desc: 'Seasoned logistics professionals managing each shipment with care, compliance, and commitment to timelines.' },
     { title: 'Competitive Pricing', desc: 'Strong carrier relationships enable us to pass on meaningful pricing advantages without compromising quality.' },

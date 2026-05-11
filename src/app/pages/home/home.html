@@ -315,19 +315,19 @@
       </div>
     </div>
     <div class="contact-form-wrap animate-up" data-delay="150">
-      <form class="contact-form" (submit)="$event.preventDefault()">
+      <form class="contact-form" (ngSubmit)="onSubmit()" #contactForm="ngForm">
         <h3 class="contact-form__title">Send an Enquiry</h3>
         <div class="form-row">
-          <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your name"/></div>
-          <div class="form-group"><label>Company</label><input type="text" placeholder="Company name"/></div>
+          <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your name" [(ngModel)]="formData.name" name="name" required/></div>
+          <div class="form-group"><label>Company</label><input type="text" placeholder="Company name" [(ngModel)]="formData.company" name="company"/></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"/></div>
-          <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 XXXXX XXXXX"/></div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" [(ngModel)]="formData.email" name="email" required/></div>
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 XXXXX XXXXX" [(ngModel)]="formData.phone" name="phone" required/></div>
         </div>
         <div class="form-group">
           <label>Service Needed</label>
-          <select>
+          <select [(ngModel)]="formData.service" name="service">
             <option value="">Select a service</option>
             <option>Air Freight</option>
             <option>Sea Freight</option>
@@ -337,8 +337,16 @@
             <option>PentaKühl (Cold Chain)</option>
           </select>
         </div>
-        <div class="form-group"><label>Message</label><textarea rows="4" placeholder="Describe your requirements..."></textarea></div>
-        <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center">Submit Enquiry</button>
+        <div class="form-group"><label>Message</label><textarea rows="4" placeholder="Describe your requirements..." [(ngModel)]="formData.message" name="message"></textarea></div>
+        @if (formStatus === 'success') {
+          <div style="color:#22c55e;margin-bottom:12px">Enquiry submitted successfully! We'll be in touch soon.</div>
+        }
+        @if (formStatus === 'error') {
+          <div style="color:#ef4444;margin-bottom:12px">Something went wrong. Please try again.</div>
+        }
+        <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center" [disabled]="formStatus === 'loading'">
+          {{ formStatus === 'loading' ? 'Submitting...' : 'Submit Enquiry' }}
+        </button>
       </form>
     </div>
   </div>
