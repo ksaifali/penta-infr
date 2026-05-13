@@ -29,6 +29,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./penta-clone/backend
+          file: ./penta-clone/backend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/penta-backend:latest
 
@@ -36,5 +37,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./penta-clone
+          file: ./penta-clone/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/penta-frontend:latest
